@@ -17,14 +17,4 @@
     <title>Document</title>
 </head>
 <body>
-    <header>
-        
-        <div>
-            <?php
-            
-            ?>
-        </div>
-    </header>
-
-
     
