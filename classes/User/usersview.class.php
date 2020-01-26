@@ -1,10 +1,14 @@
 <?php
+
+namespace User;
+
 class UsersView extends Users
 {
-    public function showLoggedIn($username)
+    public function showLoggedIn($username, $useremail)
     {
         echo '  <div class="container">
                 <h2 class="text-center m-5">Hello ' . $username . '</h2>
+                <h3 class="text-center m-4">' . $useremail . '<h3>
                 <form class="text-center" action="/Loginsystemuppgift/includes/logout.inc.php" method="post">
                     <button type="submit" class="btn btn-warning" name="logout-submit">Logout</button>
                 </form>

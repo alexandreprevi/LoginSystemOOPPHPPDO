@@ -1,4 +1,7 @@
 <?php
+
+namespace User;
+
 class UsersController extends Users
 {
     public function createUser($username, $useremail, $userpassword, $userpasswordRepeat)

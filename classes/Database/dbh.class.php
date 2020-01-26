@@ -1,5 +1,7 @@
 <?php
 
+namespace Database;
+
 class Dbh
 {
     private $host = "localhost";
@@ -10,8 +12,8 @@ class Dbh
     protected function connect()
     {
         $dsn = "mysql:host=$this->host;dbname=$this->dbN";
-        $pdo = new PDO($dsn, $this->user, $this->password);
-        $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+        $pdo = new \PDO($dsn, $this->user, $this->password);
+        $pdo->setAttribute(\PDO::ATTR_DEFAULT_FETCH_MODE, \PDO::FETCH_ASSOC);
         return $pdo;
     }
 }

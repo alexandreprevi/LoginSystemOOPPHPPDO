@@ -3,7 +3,7 @@ require 'header.php';
 ?>
 <main>
     <?php
-    $user = new UsersView();
+    $user = new User\UsersView();
     isset($_GET['error']) ? $user->showAlert($_GET['error']) : '';
     (isset($_GET['register']) && $_GET['register'] == "success") ? $user->showSuccess() : '';
     $user->displayRegisterForm();

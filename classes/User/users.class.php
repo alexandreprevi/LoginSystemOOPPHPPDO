@@ -1,5 +1,8 @@
 <?php
-class Users extends Dbh
+
+namespace User;
+
+class Users extends \Database\Dbh
 {
     protected function getUser($username, $useremail)
     {
@@ -59,6 +62,7 @@ class Users extends Dbh
                 session_start();
                 $_SESSION['userId'] = $result['id'];
                 $_SESSION['username'] = $result['username'];
+                $_SESSION['useremail'] = $result['useremail'];
 
                 header("Location: ../index.php?login=success");
                 exit();

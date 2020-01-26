@@ -1,9 +1,7 @@
 <?php
     session_start();
-    include_once 'classes/dbh.class.php';
-    include_once 'classes/users.class.php';
-    include_once 'classes/usersview.class.php';
-    include_once 'classes/userscontroller.class.php';
+    include 'includes/autoloader.inc.php';
+    spl_autoload_register('myAutoloader');
 ?>
 <!DOCTYPE html>
 <html lang="en">
