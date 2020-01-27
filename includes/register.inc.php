@@ -3,6 +3,7 @@ include_once '../classes/Database/dbh.class.php';
 include_once '../classes/User/users.class.php';
 include_once '../classes/User/usersview.class.php';
 include_once '../classes/User/userscontroller.class.php';
+
 // check if user clicked register button
 if (isset($_POST['register-submit'])) {
     
@@ -11,25 +12,8 @@ if (isset($_POST['register-submit'])) {
     $userpassword = $_POST['userpassword'];
     $userpasswordRepeat = $_POST['userpasswordRepeat'];
 
-    if (empty($username) || empty($useremail) || empty($userpassword) || empty($userpasswordRepeat)) {
-        header("Location: ../register.php?error=emptyfields&uid=".$username."&mail=".$useremail);
-        exit();
-    } elseif (!filter_var($useremail, FILTER_VALIDATE_EMAIL) && (!preg_match("/^[a-zA-Z0-9]*$/", $username))) {
-        header("Location: ../register.php?error=invalidmailuid");
-        exit();
-    } elseif (!filter_var($useremail, FILTER_VALIDATE_EMAIL)) {
-        header("Location: ../register.php?error=invalidmail&uid=".$username);
-        exit();
-    } elseif (!preg_match("/^[a-zA-Z0-9]*$/", $username)) {
-        header("Location: ../register.php?error=invaliduid&mail=".$useremail);
-        exit();
-    } elseif ($userpassword !== $userpasswordRepeat) {
-        header("Location: ../register.php?error=userpasswordcheck&mail=".$useremail."&uid=".$username);
-        exit();
-    } else {
-        $user = new User\UsersController();
-        $user->createUser($username, $useremail, $userpassword, $userpasswordRepeat);
-    }
+    $user = new User\UsersController();
+    $user->createUser($username, $useremail, $userpassword, $userpasswordRepeat);
 } else {
     header("Location: ../register.php");
     exit();

@@ -4,16 +4,6 @@ namespace User;
 
 class Users extends \Database\Dbh
 {
-    protected function getUser($username, $useremail)
-    {
-        $sql = "SELECT * FROM users WHERE username = ? OR useremail = ?";
-        $stmt = $this->connect()->prepare($sql);
-        $stmt->execute([$username, $useremail]);
-
-        $results = $stmt->fetchAll();
-        return $results;
-    }
-
     protected function setUser($username, $useremail, $userpassword)
     {
     
@@ -41,6 +31,28 @@ class Users extends \Database\Dbh
             return false;
         } else {
             header("Location: ../register.php?success=userok");
+            return true;
+        }
+    }
+
+    protected function checkInputsRegistration($username, $useremail, $userpassword, $userpasswordRepeat)
+    {
+        if (empty($username) || empty($useremail) || empty($userpassword) || empty($userpasswordRepeat)) {
+            header("Location: ../register.php?error=emptyfields&uid=".$username."&mail=".$useremail);
+            return false;
+        } elseif (!filter_var($useremail, FILTER_VALIDATE_EMAIL) && (!preg_match("/^[a-zA-Z0-9]*$/", $username))) {
+            header("Location: ../register.php?error=invalidmailuid");
+            return false;
+        } elseif (!filter_var($useremail, FILTER_VALIDATE_EMAIL)) {
+            header("Location: ../register.php?error=invalidmail&uid=".$username);
+            return false;
+        } elseif (!preg_match("/^[a-zA-Z0-9]*$/", $username)) {
+            header("Location: ../register.php?error=invaliduid&mail=".$useremail);
+            return false;
+        } elseif ($userpassword !== $userpasswordRepeat) {
+            header("Location: ../register.php?error=userpasswordcheck&mail=".$useremail."&uid=".$username);
+            return false;
+        } else {
             return true;
         }
     }
